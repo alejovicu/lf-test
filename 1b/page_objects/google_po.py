@@ -1,7 +1,7 @@
-#from selenium.webdriver.common.by import By
-
+from selenium.webdriver.common.by import By
 
 class GooglePage(object):
 
-    search_button = ""
-    # search_button = self.context.browser.find_element_by_css_selector('input[name=q]')
+    searchButton = (By.CSS_SELECTOR, 'input[name=q]')
+    firstResult = (By.CSS_SELECTOR, 'div:nth-child(1) > div > div > div > div > div.r > a:nth-child(1)')
+    

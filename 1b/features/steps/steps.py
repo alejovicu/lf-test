@@ -1,8 +1,7 @@
-from page_objects.google_po import GooglePage
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from page_objects.google_po import GooglePage
 
 wait = None
 
@@ -16,7 +15,7 @@ def step(context):
 @when('I search for "{keyToFind}"')
 def step(context, keyToFind):
     search = wait.until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[name=q]'))
+        EC.element_to_be_clickable(GooglePage.searchButton)
     )
     search.send_keys(keyToFind)
     search.send_keys(Keys.RETURN)
@@ -25,7 +24,7 @@ def step(context, keyToFind):
 @then('the Lending Front site should be listed as first result')
 def step(context):
     first_result = wait.until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, 'div:nth-child(1) > div > div > div > div > div.r > a:nth-child(1)'))
+        EC.element_to_be_clickable(GooglePage.firstResult)
     )
     EC.visibility_of(first_result)
     first_result.click()
